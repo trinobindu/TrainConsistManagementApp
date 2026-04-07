@@ -1,84 +1,42 @@
-// UC15: Safe Cargo Assignment using try-catch-finally
+public class UseCase16TrainConsistMgmt {
 
-// Custom Runtime Exception
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
-
-class GoodsBogie {
-    private String type;
-    private String cargo;
-
-    // Constructor
-    public GoodsBogie(String type) {
-        this.type = type;
-    }
-
-    // Method to assign cargo safely
-    public void assignCargo(String cargo) {
-        try {
-            System.out.println("\nAssigning cargo to " + type + " bogie...");
-
-            // Safety Rule 1
-            if (type.equalsIgnoreCase("Rectangular") &&
-                    cargo.equalsIgnoreCase("Petroleum")) {
-                throw new CargoSafetyException(
-                        "Unsafe: Petroleum cannot be transported in Rectangular bogie"
-                );
-            }
-
-            // Safety Rule 2
-            if (type.equalsIgnoreCase("Cylindrical") &&
-                    cargo.equalsIgnoreCase("Coal")) {
-                throw new CargoSafetyException(
-                        "Unsafe: Coal cannot be transported in Cylindrical bogie"
-                );
-            }
-
-            // If safe
-            this.cargo = cargo;
-            System.out.println("✅ Cargo assigned successfully: " + cargo);
-
-        } catch (CargoSafetyException e) {
-            System.out.println("❌ ERROR: " + e.getMessage());
-
-        } finally {
-            System.out.println("🔄 Cargo assignment attempt completed.");
-        }
-    }
-
-    // Display details
-    public void display() {
-        System.out.println("\n--- Bogie Details ---");
-        System.out.println("Type  : " + type);
-        System.out.println("Cargo : " + (cargo == null ? "None" : cargo));
-    }
-}
-
-// Main Class
-public class TrainConsistApp {
     public static void main(String[] args) {
 
-        // Creating bogies
-        GoodsBogie bogie1 = new GoodsBogie("Rectangular");
-        GoodsBogie bogie2 = new GoodsBogie("Cylindrical");
+        System.out.println("=======================================");
+        System.out.println(" UC16 - Manual Sorting using Bubble Sort ");
+        System.out.println("=======================================\n");
 
-        // Test Cases
+        // Create array of passenger bogie capacities
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        // ❌ Unsafe assignment
-        bogie1.assignCargo("Petroleum");
+        // Display original order
+        System.out.println("Original Capacities:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        // ❌ Unsafe assignment
-        bogie2.assignCargo("Coal");
+        System.out.println();
 
-        // ✅ Safe assignments
-        bogie1.assignCargo("Food Grains");
-        bogie2.assignCargo("Petroleum");
+        // ---- BUBBLE SORT LOGIC ----
+        for (int i = 0; i < capacities.length - 1; i++) {
 
-        // Display final status
-        bogie1.display();
-        bogie2.display();
+            for (int j = 0; j < capacities.length - i - 1; j++) {
+
+                if (capacities[j] > capacities[j + 1]) {
+                    // swap
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        // Display sorted result
+        System.out.println("\nSorted Capacities (Ascending):");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+
+        System.out.println("\n\nSorting complete.");
     }
 }
