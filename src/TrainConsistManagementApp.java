@@ -7,7 +7,6 @@ class CargoSafetyException extends RuntimeException {
     }
 }
 
-// Goods Bogie Class
 class GoodsBogie {
     private String type;
     private String cargo;
